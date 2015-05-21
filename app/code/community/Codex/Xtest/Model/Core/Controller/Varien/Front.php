@@ -29,6 +29,20 @@ class Codex_Xtest_Model_Core_Controller_Varien_Front extends Mage_Core_Controlle
         }
     }
 
+    /**
+     * Overridden for Magento 1.7 compatibility
+     *
+     * @return Mage_Core_Model_Url_Rewrite_Request|Mage_Core_Model_Url_Rewrite
+     */
+    protected function _getRequestRewriteController()
+    {
+        if (is_callable('parent::_getRequestRewriteController')) {
+            return parent::_getRequestRewriteController();
+        } else {
+            return Mage::getModel('core/url_rewrite');
+        }
+    }
+
     public function setRouter($router)
     {
         $this->_routers = $router;
