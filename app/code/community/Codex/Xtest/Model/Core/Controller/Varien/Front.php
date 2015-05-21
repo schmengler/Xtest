@@ -36,7 +36,7 @@ class Codex_Xtest_Model_Core_Controller_Varien_Front extends Mage_Core_Controlle
      */
     protected function _getRequestRewriteController()
     {
-        if (is_callable('parent::_getRequestRewriteController')) {
+        if (method_exists('Mage_Core_Controller_Varien_Front', '_getRequestRewriteController')) {
             return parent::_getRequestRewriteController();
         } else {
             return Mage::getModel('core/url_rewrite');
