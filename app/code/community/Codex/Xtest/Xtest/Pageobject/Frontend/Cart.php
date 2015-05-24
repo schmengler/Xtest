@@ -2,6 +2,13 @@
 
 class Codex_Xtest_Xtest_Pageobject_Frontend_Cart extends Codex_Xtest_Xtest_Pageobject_Abstract
 {
+    protected $_selectors = array(
+        'row_product_name'        => '.product-name',
+        'row_product_price'       => '.product-cart-price .price',
+        'row_total'               => '.product-cart-total .price',
+        'grand_total'             => '.shopping-cart-totals-table td .price',
+        'button_proceed_checkout' => '.btn-proceed-checkout',
+    );
 
     public function open()
     {
@@ -37,9 +44,9 @@ class Codex_Xtest_Xtest_Pageobject_Frontend_Cart extends Codex_Xtest_Xtest_Pageo
             {
                 $result[ $item_id ] = array(
                     'tr' => $tr,
-                    'product_price' => $tr->byCssSelector('.product-cart-price .price')->text(),
-                    'row_total' => $tr->byCssSelector('.product-cart-total .price')->text(),
-                    'name' => $tr->byCssSelector('.product-name'),
+                    'product_price' => $tr->byCssSelector($this->_selectors['row_product_price'])->text(),
+                    'row_total' => $tr->byCssSelector($this->_selectors['row_total'])->text(),
+                    'name' => $tr->byCssSelector($this->_selectors['row_product_name']),
                     //'qty' => $tr->byName('cart['.$item_id.'][qty]')->value(), // TODO
                 );
             }
@@ -57,14 +64,14 @@ class Codex_Xtest_Xtest_Pageobject_Frontend_Cart extends Codex_Xtest_Xtest_Pageo
 
     public function getGrandTotal()
     {
-        $prices = $this->byCssSelector('.shopping-cart-totals-table td .price');
+        $prices = $this->byCssSelector($this->_selectors['grand_total']);
         $grand_total = end( $prices ); // Last Element is Grand-Total
         return $grand_total->text();
     }
 
     public function clickProceedCheckout()
     {
-        $this->byCssSelector('.btn-proceed-checkout')->click();
+        $this->byCssSelector($this->_selectors['button_proceed_checkout'])->click();
     }
 
     public function setCouponCode( $code )

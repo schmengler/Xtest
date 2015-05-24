@@ -3,6 +3,11 @@
 class Codex_Xtest_Xtest_Pageobject_Frontend_Product extends Codex_Xtest_Xtest_Pageobject_Abstract
 {
 
+    protected $_selectors = array(
+        'add_to_cart_button' => '.add-to-cart-buttons button',
+        'success_message'    => 'ul.messages li.success-msg'
+    );
+
     /** @var  Mage_Catalog_Model_Product */
     protected $_product;
 
@@ -37,7 +42,7 @@ class Codex_Xtest_Xtest_Pageobject_Frontend_Product extends Codex_Xtest_Xtest_Pa
 
     public function pressAddToCart()
     {
-        $elements = $this->findElementsByCssSelector('.add-to-cart-buttons button', $this->getAddToCartForm() );
+        $elements = $this->findElementsByCssSelector($this->_selectors['add_to_cart_button'], $this->getAddToCartForm() );
         foreach( $elements AS $element )
         {
             if( $element->displayed() )
@@ -50,7 +55,7 @@ class Codex_Xtest_Xtest_Pageobject_Frontend_Product extends Codex_Xtest_Xtest_Pa
 
     public function assertAddToCartMessageAppears()
     {
-        $addToCartText = $this->byCssSelector('ul.messages li.success-msg')->text();
+        $addToCartText = $this->byCssSelector($this->_selectors['success_message'])->text();
         $this->assertStringEndsWith( Mage::helper('checkout')->__("%s was added to your shopping cart.",''), $addToCartText );
         return $this;
     }

@@ -73,14 +73,15 @@ php phpunit.phar ../app/code/local/Codex/Demo/Test/Controller/HomepageController
 
 ### Parameter
 
---store_code - store code thats bootet on frontend-tests
---external -- run tests thats have an @external annotation also
---disable_double - do not use double mocks
+- --store_code - store code thats bootet on frontend-tests
+- --external -- run tests thats have an @external annotation also
+- --disable_double - do not use double mocks
 
 #### Selenium based
---browser - Sets Browser thats used in selenium tests (must be available)
---breakpoints - define repsonsive breakpoints eg. "1024x800,1280x1024"
---debug -- do not close browser window on exception
+
+- --browser - Sets Browser thats used in selenium tests (must be available)
+- --breakpoints - define repsonsive breakpoints eg. "1024x800,1280x1024"
+- --debug -- do not close browser window on exception
 
 
 ### Configuration
