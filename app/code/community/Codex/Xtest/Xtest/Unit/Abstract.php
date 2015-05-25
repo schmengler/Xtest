@@ -1,6 +1,6 @@
 <?php
 
-class Codex_Xtest_Xtest_Unit_Abstract extends PHPUnit_Framework_TestCase
+abstract class Codex_Xtest_Xtest_Unit_Abstract extends PHPUnit_Framework_TestCase
 {
     const METHOD_GET = 'GET';
     const METHOD_POST = 'POST';
