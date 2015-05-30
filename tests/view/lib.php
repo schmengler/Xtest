@@ -37,8 +37,7 @@ function get_images( $basedir, $scenario, $feature )
 function get_behat_result_dir()
 {
 
-
-    $mageDir = dirname( dirname( dirname($_SERVER['SCRIPT_FILENAME']) ) );
+    $mageDir = isset($_SERVER['SCRIPT_FILENAME']) ? dirname( dirname( dirname($_SERVER['SCRIPT_FILENAME']) ) ) : dirname(getcwd());
 
     if( $_REQUEST['time'] )
     {
@@ -51,4 +50,14 @@ function get_behat_result_dir()
     }
 
     return $behat_result_dir = max( glob($mageDir.'/var/tests/*') );
+}
+function get_image_url($img, $forStaticReport)
+{
+    $file = $img . '.png';
+    if ($forStaticReport) {
+        return $file;
+    } else {
+        $time = isset($_REQUEST['time']) ? $_REQUEST['time'] : '';
+        return 'images.php?file=' . urlencode($file) . '&amp;time=' . $time;
+    }
 }

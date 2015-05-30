@@ -146,6 +146,10 @@ class Codex_Xtest_Model_Phpunit_Listener implements PHPUnit_Framework_TestListen
     public function endTestSuite(PHPUnit_Framework_TestSuite $suite)
     {
         file_put_contents($this->dir . DS . 'log.json', json_encode($this->results));
+        ob_start();
+        include Mage::getBaseDir() . DS . 'tests' . DS . 'view' . DS . 'index.php';
+        $reportHtml = ob_get_clean();
+        file_put_contents($this->dir . DS . 'index.html', $reportHtml);
     }
 
 

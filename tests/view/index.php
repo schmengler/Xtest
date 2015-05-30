@@ -1,5 +1,6 @@
 <?php
-require __DIR__ . '/lib.php';
+require_once __DIR__ . '/lib.php';
+$createStaticReport = PHP_SAPI === 'cli';
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +62,7 @@ require __DIR__ . '/lib.php';
 
         <div class="row">
 
+            <?php if (!$createStaticReport): ?>
             <div class="col-md-6">
 
                 <select class="form-control" onchange="document.location.href=this.value;">
@@ -91,6 +93,7 @@ require __DIR__ . '/lib.php';
                 </div>
 
             </div>
+            <?php endif; ?>
 
         </div>
 
@@ -176,9 +179,7 @@ require __DIR__ . '/lib.php';
                                                             <li>
                                                                 <img class="img-thumbnail"
                                                                      title="<?php htmlentities($title); ?>"
-                                                                     src="images.php?file=<?php echo urlencode(
-                                                                         $img . '.png'
-                                                                     ); ?>&time=<?php echo $_REQUEST['time']; ?>"/>
+                                                                     src="<?php echo get_image_url($img, $createStaticReport) ?>"/>
                                                             </li>
 
                                                         <?php endforeach; ?>
